@@ -1,0 +1,25 @@
+﻿<link rel="stylesheet" href="css/singleplayer.css"/>
+
+@{
+    ViewBag.Title = "Yahtzee!";
+}
+<h2>Yahtzee! - Singleplayer</h2>
+<div id="game-board">
+    <div id="dice">
+        @for (int i = 0; i < 5; i++)
+        {
+            <button asp-area="" asp-controller="Dice" asp-action="LockUnlockDie"
+                    class="die" id="@("die" + i)" data-state="unlocked">
+                <!-- logic in site.js -->
+            </button>
+        }
+    </div>
+    <button id="roll-dice" asp-area="" asp-controller="Dice" asp-action="GetRolledDice">Roll The Dice!</button>
+    <table id="scoreboard">
+    </table>
+</div>
+
+@section Scripts {
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="js/site.js"></script>
+}
