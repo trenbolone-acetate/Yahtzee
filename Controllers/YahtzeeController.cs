@@ -8,14 +8,12 @@ namespace YahtzeeGame.Controllers
     {
         public static List<List<Die>> rolls = new List<List<Die>>();
         // GET: YahtzeeController
-        public ActionResult Index()
+        public void Index()
         {
-            return View();
         }
 
-        public IActionResult HandleGameResults()
+        public void HandleGameResults()
         {
-            return View();
         }
 
     }

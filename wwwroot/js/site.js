@@ -1,39 +1,41 @@
-﻿$("#roll-dice").click(function () {
-    //disable the .die buttons
-    $(".die").attr("disabled", "true");
-    //start the animations
-    for (var j = 0; j < 3; j++) {
-        setTimeout(function () {
-            //"rolling" the dice
-            $.get("/Dice/GetRolledDice", function (data) {
+﻿var rolls = ["0", "0", "0", "0", "0"];
+var clickHandler = function (e) {
+    setTimeout(function () {
+        $.get('/Dice/GetRolledDice', function (data) {
+            for (var i = 0; i < 12; i++) {
+                $(`#comb-score-${i}`).text("-");
+            }
+            $(".die").prop("disabled", true);
+            setTimeout(function () {
                 for (var i = 0; i < data.length; i++) {
+                    finalRoll = data;
                     var die = $("#die" + i);
+                    rolls[i] = data[i].value;
                     // Check if the die is unlocked before rolling it
                     if (data[i].isLocked === false) {
                         die.text(data[i].value);
                     }
                 }
-            });
-        }, 200 * j);
-    }
-    //re-enable the .die buttons after the animations have finished
+            }, 250);
+            $(".die").prop("disabled", false);
+        }, 'json');
+    }, 200);
     setTimeout(function () {
-        $(".die").removeAttr("disabled");
-    }, 200 * 3);
-});
-//locking-unlocking the die
-$(".die").click(function () {
-    var index = $(this).attr("id").substring(3);
-    var isLocked = !($(this).data("state") === "unlocked");
-    $.get("/Dice/LockUnlockDie", { index: index });
-    // Toggle the border color and background color
-    if (!isLocked) {
-        $(this).css("border", "4px dashed red"); // Reset to default color
-        $(this).css("background-color", "ivory"); // Reset to default color
-        $(this).data("state", "unlocked");
-    } else {
-        $(this).css("border", "1px dashed red");
-        $(this).css("background-color", "red");
-        $(this).data("state", "locked");
-    }
-});
+        console.log(rolls);
+        $.post("/Dice/CombinationChecker", { rolls: JSON.stringify(rolls) }, function (response) {
+            console.log(response);
+            for (var i = 0; i < response.length; i++) {
+                if (response[i]) {
+                    $(`#comb-name-${i} button`).prop("disabled", false); // Enable button
+                    $(`#comb-name-${i}`).css("background-color", "#d7ffc9");
+                } else {
+                    $(`#comb-name-${i} button`).prop("disabled", true); // Disable button
+                    $(`#comb-name-${i}`).css("background-color", ""); // Reset background color
+                }
+            }
+        });
+    }, 600);
+    e.stopImmediatePropagation();
+    return false;
+}
+$("#roll-dice").on('click', clickHandler);

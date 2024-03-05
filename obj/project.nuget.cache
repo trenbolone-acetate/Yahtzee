@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "+wPWqwk28tWI8onkSq6GZGW7fdITT9Ay73b66OK+0RroJePAj9zpM9sQNaXiYqN+XHDINkImAGO3yAxGs027Ng==",
+  "success": true,
+  "projectFilePath": "W:\\YahtzeeGame\\YahtzeeGame.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\User-PC\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.17.0\\microsoft.visualstudio.azure.containers.tools.targets.1.17.0.nupkg.sha512"
+  ],
+  "logs": []
+}

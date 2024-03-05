@@ -1,7 +1,9 @@
-﻿<link rel="stylesheet" href="css/singleplayer.css"/>
+﻿@using YahtzeeGame.CombinationHandler
+<link rel="stylesheet" href="css/singleplayer.css"/>
 
 @{
     ViewBag.Title = "Yahtzee!";
+    var (upperSectionCombs, lowerSectionCombs) = CombinationHandler.GetCombinationNames();
 }
 <h2>Yahtzee! - Singleplayer</h2>
 <div id="game-board">
@@ -9,14 +11,56 @@
         @for (int i = 0; i < 5; i++)
         {
             <button asp-area="" asp-controller="Dice" asp-action="LockUnlockDie"
-                    class="die" id="@("die" + i)" data-state="unlocked">
+                    class="die" id="@("die" + i)" rolls-state="unlocked">
                 <!-- logic in site.js -->
             </button>
         }
     </div>
-    <button id="roll-dice" asp-area="" asp-controller="Dice" asp-action="GetRolledDice">Roll The Dice!</button>
-    <table id="scoreboard">
-    </table>
+    <button id="roll-dice">Roll The Dice!</button>
+    <div class="container">
+        <table id="combinations">
+            <thead>
+            <tr>
+                <th class="comb">Combination</th>
+                <th>Score</th>
+                <th>|||</th>
+                <th class="comb">Combination</th>
+                <th>Score</th>
+            </tr>
+            </thead>
+            <tbody>
+            @for (int i = 0,j=6; i < upperSectionCombs.Count; i++,j++)
+            {
+                <tr>
+                    <td id="comb-name-@i">
+                        <button class="comb-name-bttn">@upperSectionCombs[i]</button>
+                    </td>
+                    <td id="comb-score-@i">-</td>
+
+                <td>|||</td>
+
+                    <td id="comb-name-@j">
+                        <button class="comb-name-bttn">@lowerSectionCombs[i]</button>
+                    </td>
+                    <td id="comb-score-@j">-</td>
+                </tr>
+            }
+            <tr id="bonus-chance">
+                <td id="bonus-name">Bonus</td>
+                <td id="bonus-score">-</td>
+                <td>|||</td>
+                <td id="chance-name">
+                        <button id="chance-name-bttn">Chance</button>
+                </td>
+                <td id="chance-score">-</td>
+            </tr>
+            <tr id="overall-score">
+                <th colspan="4">Overall Score</th>
+                <th>0</th>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
 
 @section Scripts {
