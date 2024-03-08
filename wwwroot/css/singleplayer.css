@@ -1,7 +1,7 @@
 ﻿@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,300&display=swap");
 /* bg image */
 body {
-    background-color: dimgrey;
+    background-color: grey;
     font-family: "Nunito Sans", sans-serif;
 }
 h2{
@@ -19,8 +19,8 @@ h2{
     box-shadow: black 5px 5px;
     width: 90%;
     margin: auto;
-    background-color: rgba(255, 255, 255, 0.8);
-    border-radius: 5px;
+    background-color: rgba(146, 103, 62, 1);
+    border-radius: 20px;
     padding: 20px;
 }
 
@@ -40,7 +40,7 @@ h2{
     font-size: xxx-large;
     background-color: ivory;
     border-radius: 7px;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6);
 }
     /* Style for the currently animating dice */
     .die:disabled {
@@ -64,6 +64,7 @@ h2{
         background-color: chocolate;
         color: ivory;
     }
+    
 #roll-dice:disabled {
     cursor:not-allowed;
     background-color:gray;
@@ -85,16 +86,13 @@ h2{
     padding:0%;
 }
 table {
+    background-color: ivory;
     width: 800px;
     border-collapse: collapse;
     overflow: hidden;
-    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    box-shadow: 10px 10px 20px rgba(0,0,0,0.6);
 }
 
-.comb-name {
-    padding: 0;
-    background-color: rgba(255,255,255,0.2);
-}
 .comb-name-bttn, #chance-name-bttn {
     width: 100%;
     appearance: none;
@@ -102,10 +100,15 @@ table {
     background-color: transparent;
     margin: 0;
 }
-.comb-name-bttn:disabled{
-    background-color:grey;
-    cursor:not-allowed;
-    color:ivory;
+    .comb-name-bttn:disabled{
+        background-color: grey;
+        cursor: not-allowed;
+        color: ivory;
+    }
+#chance-name-bttn:disabled {
+    background-color: grey;
+    cursor: not-allowed;
+    color: ivory;
 }
 thead th {
     color: ivory;
@@ -114,21 +117,6 @@ thead th {
 
 tbody tr:hover {
     background-color: rgba(255,255,55,0.2);
-}
-
-.comb-name {
-    position: relative;
-}
-
-.comb-name:hover:before {
-    content: "";
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: -9999px;
-    bottom: -9999px;
-    background-color: rgba(255,255,55,0.5);
-    z-index: -1;
 }
 #bonus-chance{
     text-align:center;

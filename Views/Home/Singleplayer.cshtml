@@ -11,7 +11,7 @@
         @for (int i = 0; i < 5; i++)
         {
             <button asp-area="" asp-controller="Dice" asp-action="LockUnlockDie"
-                    class="die" id="@("die" + i)" rolls-state="unlocked">
+                    class="die" id="@("die" + i)">
                 <!-- logic in site.js -->
             </button>
         }
@@ -33,14 +33,18 @@
             {
                 <tr>
                     <td id="comb-name-@i">
-                        <button class="comb-name-bttn">@upperSectionCombs[i]</button>
+                        <button id="comb-name-bttn-@i" class="comb-name-bttn" data-preserved="false">
+                            @upperSectionCombs[i]
+                        </button>
                     </td>
                     <td id="comb-score-@i">-</td>
 
                 <td>|||</td>
 
                     <td id="comb-name-@j">
-                        <button class="comb-name-bttn">@lowerSectionCombs[i]</button>
+                            <button id="comb-name-bttn-@j" class="comb-name-bttn" data-preserved="false">
+                            @lowerSectionCombs[i]
+                        </button>
                     </td>
                     <td id="comb-score-@j">-</td>
                 </tr>
@@ -49,10 +53,10 @@
                 <td id="bonus-name">Bonus</td>
                 <td id="bonus-score">-</td>
                 <td>|||</td>
-                <td id="chance-name">
-                        <button id="chance-name-bttn">Chance</button>
+                    <td id="chance-name">
+                        <button id="chance-name-bttn" data-preserved="false">Chance</button>
                 </td>
-                <td id="chance-score">-</td>
+                    <td id="chance-score" data-preserved="false">-</td>
             </tr>
             <tr id="overall-score">
                 <th colspan="4">Overall Score</th>

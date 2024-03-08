@@ -16,7 +16,6 @@ W:\YahtzeeGame\obj\Debug\net6.0\YahtzeeGame.RazorAssemblyInfo.cache
 W:\YahtzeeGame\obj\Debug\net6.0\YahtzeeGame.RazorAssemblyInfo.cs
 W:\YahtzeeGame\obj\Debug\net6.0\staticwebassets.build.json
 W:\YahtzeeGame\obj\Debug\net6.0\staticwebassets.development.json
-W:\YahtzeeGame\obj\Debug\net6.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
 W:\YahtzeeGame\obj\Debug\net6.0\scopedcss\bundle\YahtzeeGame.styles.css
 W:\YahtzeeGame\obj\Debug\net6.0\scopedcss\projectbundle\YahtzeeGame.bundle.scp.css
 W:\YahtzeeGame\obj\Debug\net6.0\YahtzeeGame.dll
@@ -25,3 +24,4 @@ W:\YahtzeeGame\obj\Debug\net6.0\YahtzeeGame.pdb
 W:\YahtzeeGame\obj\Debug\net6.0\YahtzeeGame.genruntimeconfig.cache
 W:\YahtzeeGame\obj\Debug\net6.0\ref\YahtzeeGame.dll
 W:\YahtzeeGame\bin\Debug\net6.0\libman.json
+W:\YahtzeeGame\obj\Debug\net6.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
