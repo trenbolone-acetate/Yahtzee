@@ -50,25 +50,30 @@ h2{
     }
 /* Style for the roll button */
 #roll-dice {
-    display: block;
-    margin: 20px auto;
-    padding: 10px 20px;
-    background-color: #007BFF;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    font-size: 18px;
-    transition: background-color 0.3s ease;
+    width:20%;
+    display:block;
+    margin:2% auto;
+    font-size: large;
+    background: ivory;
+    border: 1pt solid #6c4622;
+    box-shadow: 5px 5px 0 black, -5px -5px 0 #6d3f13, -5px 5px 0 #6d3f13, 5px -5px 0 black;
+    transition: 500ms ease-in-out;
 }
     #roll-dice:hover {
-        background-color: chocolate;
-        color: ivory;
+        box-shadow: 20px 5px 0 black, -20px -5px 0 black;
+        background: #d7ffc9;
     }
-    
-#roll-dice:disabled {
-    cursor:not-allowed;
-    background-color:gray;
-}
+    #roll-dice:focus {
+        outline: none;
+    }
+    #roll-dice:disabled {
+        color:lightgray;
+        cursor: not-allowed;
+        background-color: gray;
+        border: 1pt solid gray;
+        box-shadow: 5px 5px 0 grey, -5px -5px 0 grey, -5px 5px 0 grey, 5px -5px 0 grey;
+        transition: 500ms ease-in-out;
+    }
 #combinations {
     margin: auto;
     width: 60%;
@@ -90,7 +95,7 @@ table {
     width: 800px;
     border-collapse: collapse;
     overflow: hidden;
-    box-shadow: 10px 10px 20px rgba(0,0,0,0.6);
+    box-shadow: 5pt 5pt 2pt rgba(80,80,80,0.6);
 }
 
 .comb-name-bttn, #chance-name-bttn {
@@ -99,24 +104,22 @@ table {
     border: none;
     background-color: transparent;
     margin: 0;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
-    .comb-name-bttn:disabled{
+
+    .comb-name-bttn:disabled, #chance-name-bttn:disabled {
         background-color: grey;
         cursor: not-allowed;
         color: ivory;
+        transition: background-color 0.3s ease, color 0.3s ease;
     }
-#chance-name-bttn:disabled {
-    background-color: grey;
-    cursor: not-allowed;
-    color: ivory;
-}
 thead th {
     color: ivory;
     background-color: #55608f;
 }
 
 tbody tr:hover {
-    background-color: rgba(255,255,55,0.2);
+    background-color: rgba(30,30,30,0.3);
 }
 #bonus-chance{
     text-align:center;

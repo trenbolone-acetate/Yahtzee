@@ -5,12 +5,12 @@ var rollDiceClick = function (e) {
     $("#roll-dice").prop("disabled", true);
     var intervalRepeatCount = 0;
     for (var k = 0; k < 12; k++) {
-        if ($(`#comb-score-${k}`).data('preserved') == true) {
+        if ($(`#comb-score-${k}`).data('preserved') === true) {
             continue;
         }
         $(`#comb-score-${k}`).text("-");
     }
-    if ($(`#chance-score`).data('preserved') == false) {
+    if ($(`#chance-score`).data('preserved') === false) {
         $("#chance-score").text("-");
     }
     var diceInterval = setInterval(function () {
@@ -23,18 +23,21 @@ var rollDiceClick = function (e) {
                     }
                 }
             }, 'json');
-        if (intervalRepeatCount == 2) { clearInterval(diceInterval); return; }
+        if (intervalRepeatCount === 2) { clearInterval(diceInterval); return; }
         intervalRepeatCount++;
     }, 300);
-
-
+    ShowAvailableCombinations();
+    e.stopImmediatePropagation();
+    return false;
+}
+var ShowAvailableCombinations = function (e) {
     setTimeout(function () {
         console.log(rolls);
         $.post("/Dice/CombinationChecker", { rolls: JSON.stringify(rolls) }, function (response) {
             console.log(response);
             for (var i = 0; i < response.length; i++) {
                 if (response[i]) {
-                    if ($(`#comb-score-${i}`).data('preserved') == true) {
+                    if ($(`#comb-score-${i}`).data('preserved') === true) {
                         continue;
                     }
                     $(`#comb-name-bttn-${i}`).prop("disabled", false); //enable combination button
@@ -42,14 +45,14 @@ var rollDiceClick = function (e) {
                 } else {
                     $(`#comb-name-bttn-${i}`).prop("disabled", true); //disable combination button
                     $(`#comb-name-${i}`).css("background-color", ""); //reset bgcolor
-                    $(`#chance-score`).css("background-color", ""); //reset bgcolor for chance
                 }
             }
-            if ($(`#chance-score`).data('preserved') == false) {
-                $(`#chance-name-bttn`).prop("disabled", false);
-            }
         });
-        $(".die").prop("disabled", false);
+        if ($(`#chance-score`).data('preserved') === false) {
+            $(`#chance-name-bttn`).prop("disabled", false); //enable combination button
+            $(`#chance-name`).css("background-color", "#d7ffc9");//set bgcolor to greenish if true returned        
+        }
+        
     }, 1000);
     e.stopImmediatePropagation();
     return false;
@@ -67,7 +70,7 @@ var CombClick = function (e) {
     });
     $(`#comb-score-${id}`).data('preserved', true); //adding custom attribute "preserved" for score <td>
     for (var i = 0; i < 12; i++) {
-        $(`#comb-name-bttn-${i}`).prop('disabled', true); //disable combination button
+        $(`#comb-name-bttn-${i}`).prop('disabled', true); //disable combination buttons
         $(`#comb-name-${i}`).css("background-color", "");
     }
     $(`#chance-name-bttn`).prop("disabled", true); //disable chance button
@@ -80,8 +83,12 @@ var ChanceCombClick = function (e) {
         return a + b;
     }, 0);
     $("#chance-score").text(chanceSum);
-    $(`#chance-score`).data('preserved', true);
+    $("#chance-score").data('preserved', true);
     $("#chance-name-bttn").prop("disabled", true);
+    for (var i = 0; i < 12; i++) {
+        $(`#comb-name-bttn-${i}`).prop('disabled', true); 
+        $(`#comb-name-${i}`).css("background-color", "");
+    }
     $("#roll-dice").prop("disabled", false);
 }
 $("#roll-dice").on('click', rollDiceClick);
