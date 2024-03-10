@@ -33,7 +33,7 @@
             {
                 <tr>
                     <td id="comb-name-@i">
-                        <button id="comb-name-bttn-@i" class="comb-name-bttn">
+                            <button id="comb-name-bttn-@i" class="comb-name-bttn" data-available="1">
                             @upperSectionCombs[i]
                         </button>
                     </td>
@@ -42,7 +42,7 @@
                 <td>|||</td>
 
                     <td id="comb-name-@j">
-                            <button id="comb-name-bttn-@j" class="comb-name-bttn">
+                            <button id="comb-name-bttn-@j" class="comb-name-bttn" data-available="1">
                             @lowerSectionCombs[i]
                         </button>
                     </td>
@@ -54,13 +54,13 @@
                 <td id="bonus-score">-</td>
                 <td>|||</td>
                     <td id="chance-name">
-                        <button id="chance-name-bttn" data-preserved="false">Chance</button>
+                        <button id="chance-name-bttn" data-available="1">Chance</button>
                 </td>
                     <td id="chance-score" data-preserved="false">-</td>
             </tr>
-            <tr id="overall-score">
+            <tr id="overall">
                 <th colspan="4">Overall Score</th>
-                <th>0</th>
+                <th id="overall-score">0</th>
             </tr>
             </tbody>
         </table>

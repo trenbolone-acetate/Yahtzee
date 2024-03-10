@@ -106,9 +106,13 @@ table {
     margin: 0;
     transition: background-color 0.3s ease, color 0.3s ease;
 }
-
-    .comb-name-bttn:disabled, #chance-name-bttn:disabled {
+    .comb-name-bttn[data-available="0"], #chance-name-bttn[data-available="0"] {
         background-color: grey;
+        color: ivory;
+        transition: background-color 0.3s ease, color 0.3s ease;
+    }
+    .comb-name-bttn:disabled, #chance-name-bttn:disabled {
+        background-color: #323232;
         cursor: not-allowed;
         color: ivory;
         transition: background-color 0.3s ease, color 0.3s ease;
