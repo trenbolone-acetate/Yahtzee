@@ -59,8 +59,5 @@ namespace YahtzeeGame.Controllers
             ScoreDictionary[(Combination)combination] = score;
             return score;
         }
-
-
-        public void BonusCheck(){}
     }
 }

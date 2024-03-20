@@ -1,4 +1,5 @@
 ﻿@using YahtzeeGame.CombinationHandler
+<style type="text/css"></style>
 <link rel="stylesheet" href="css/singleplayer.css"/>
 
 @{
@@ -8,20 +9,20 @@
 <h2>Yahtzee! - Singleplayer</h2>
 <div id="game-board">
     <div id="dice">
-        @for (int i = 0; i < 5; i++)
+        @for (var i = 0; i < 5; i++)
         {
-            <button asp-area="" asp-controller="Dice" asp-action="LockUnlockDie"
-                    class="die" id="@("die" + i)">
-                <!-- logic in site.js -->
+            <button class="die" id="@("die" + i)" isLocked="false">
+                <img src="" alt=@("Die#"+i)>
             </button>
         }
+
     </div>
     <button id="roll-dice">Roll The Dice!</button>
     <div class="container">
         <table id="combinations">
             <thead>
             <tr>
-                <th class="comb">Combination</th>
+                <th>Combination</th>
                 <th>Score</th>
                 <th>|||</th>
                 <th class="comb">Combination</th>
@@ -29,20 +30,20 @@
             </tr>
             </thead>
             <tbody>
-            @for (int i = 0,j=6; i < upperSectionCombs.Count; i++,j++)
+            @for (int i = 0, j = 6; i < upperSectionCombs.Count; i++, j++)
             {
                 <tr>
                     <td id="comb-name-@i">
-                            <button id="comb-name-bttn-@i" class="comb-name-bttn" data-available="1">
+                        <button id="comb-name-bttn-@i" class="comb-name-bttn" data-available="1">
                             @upperSectionCombs[i]
                         </button>
                     </td>
                     <td id="comb-score-@i">-</td>
 
-                <td>|||</td>
+                    <td>|||</td>
 
                     <td id="comb-name-@j">
-                            <button id="comb-name-bttn-@j" class="comb-name-bttn" data-available="1">
+                        <button id="comb-name-bttn-@j" class="comb-name-bttn" data-available="1">
                             @lowerSectionCombs[i]
                         </button>
                     </td>
@@ -53,10 +54,10 @@
                 <td id="bonus-name">Bonus</td>
                 <td id="bonus-score">-</td>
                 <td>|||</td>
-                    <td id="chance-name">
-                        <button id="chance-name-bttn" data-available="1">Chance</button>
+                <td id="chance-name">
+                    <button id="chance-name-bttn" data-available="1">Chance</button>
                 </td>
-                    <td id="chance-score" data-preserved="false">-</td>
+                <td id="chance-score" data-preserved="false">-</td>
             </tr>
             <tr id="overall">
                 <th colspan="4">Overall Score</th>

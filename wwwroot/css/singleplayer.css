@@ -19,7 +19,9 @@ h2{
     box-shadow: black 5px 5px;
     width: 90%;
     margin: auto;
+    background-color: #92673e;
     background-color: rgba(146, 103, 62, 1);
+    -ms-border-radius: 20px;
     border-radius: 20px;
     padding: 20px;
 }
@@ -27,27 +29,29 @@ h2{
 #dice {
     display: flex;
     flex-direction: row;
+    -o-justify-content: center;
+    -webkit-justify-content: center;
     justify-content: center;
 }
+
 /* Style for the dice */
 .die {
     width: 100px;
     height: 100px;
-    border: 1px solid black;
     display: inline-block;
+    padding: 0;
     margin: 10px;
-    text-align: center;
-    font-size: xxx-large;
-    background-color: ivory;
     border-radius: 7px;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6);
 }
-    /* Style for the currently animating dice */
+
+/* Style for the currently animating dice */
     .die:disabled {
-        background-color: darkslategrey;
-        color: ivory;
         cursor: not-allowed;
     }
+button.die.locked {
+    border: 2pt solid red;
+}
+
 /* Style for the roll button */
 #roll-dice {
     width:20%;
@@ -95,6 +99,7 @@ table {
     width: 800px;
     border-collapse: collapse;
     overflow: hidden;
+    box-shadow: 5pt 5pt 2pt #505050;
     box-shadow: 5pt 5pt 2pt rgba(80,80,80,0.6);
 }
 
@@ -123,8 +128,10 @@ thead th {
 }
 
 tbody tr:hover {
+    background-color: #1e1e1e;
     background-color: rgba(30,30,30,0.3);
 }
+
 #bonus-chance{
     text-align:center;
 }
