@@ -15,7 +15,10 @@
                 <img src="" alt=@("Die#"+i)>
             </button>
         }
-
+        <div id="rerolls">
+            <button id="reroll-button">Reroll</button>
+            <div id="reroll-div">Rerolls:<span id="rerolls-amount"></span></div>
+        </div>
     </div>
     <button id="roll-dice">Roll The Dice!</button>
     <div class="container">
@@ -70,5 +73,5 @@
 
 @section Scripts {
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="js/site.js"></script>
+    <script defer src="js/site.js"></script>
 }

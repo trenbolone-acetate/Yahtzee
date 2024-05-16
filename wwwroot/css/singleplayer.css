@@ -51,7 +51,47 @@ h2{
 button.die.locked {
     border: 2pt solid red;
 }
-
+#rerolls{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#reroll-div{
+    margin-top: 10%;
+    padding: 1%;
+    height: 70px;
+    font-size: 20pt;
+    color: ivory;
+    border: 2px solid rgba(146, 103, 62, 0.4);
+    background-color: #674420;
+    align-content: center;
+    transition: 0.2s;
+}
+#reroll-button{
+    width:70%;
+    display:block;
+    margin:2% auto;
+    font-size: large;
+    background: ivory;
+    border: 2pt dashed #92673e;
+    transition: 0.2s;
+}
+#reroll-button:hover{
+    transition: 0.2s;
+    box-shadow: inset 0 0 5px grey;
+    background: #d7ffc9;
+}
+#reroll-button:hover + #reroll-div {
+    transition: 0.2s;
+    animation: rotation 0.3s none ease-in-out; 
+}
+#reroll-button:disabled{
+    transition: 0.2s;
+    background: gray;
+    color: black;
+    cursor: not-allowed;
+    border: 2pt dashed #92673e;
+}
 /* Style for the roll button */
 #roll-dice {
     width:20%;
@@ -68,7 +108,6 @@ button.die.locked {
         background: #d7ffc9;
     }
     #roll-dice:focus {
-        outline: none;
     }
     #roll-dice:disabled {
         color:lightgray;
@@ -100,7 +139,6 @@ table {
     border-collapse: collapse;
     overflow: hidden;
     box-shadow: 5pt 5pt 2pt #505050;
-    box-shadow: 5pt 5pt 2pt rgba(80,80,80,0.6);
 }
 
 .comb-name-bttn, #chance-name-bttn {
@@ -140,4 +178,23 @@ tbody tr:hover {
 }
 #overall-score{
     background-color:seagreen;
+}
+@keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+        color: #1ebc1f;
+        box-shadow: 2px 2px 0 black, -2px -2px 0 #1a1e21, -2px 2px 0 black, 2px -2px 0 black;
+    }
+    40% {
+        transform: rotate(3deg);
+    }
+    50% {
+        transform: rotate(-6deg);
+    }
+    75% {
+        transform: rotate(3deg);
+    }
+    100%{
+        transform: rotate(0deg);
+    }
 }

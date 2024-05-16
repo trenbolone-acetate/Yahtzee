@@ -13,6 +13,7 @@ var combs = ["1",
     "ls"];
 var scores = ["0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0"];
 var bonusScores = ["0", "0", "0", "0", "0", "0"];
+var rerolls = 3;
 var diceImages = ["images/die1.png", "images/die2.png", "images/die3.png", "images/die4.png", "images/die5.png", "images/die6.png"];
 for (let i = 0; i < 12; i++) {
     $(`#comb-name-bttn-${i}`).prop("disabled", true);
@@ -21,13 +22,34 @@ for (let i = 0; i < 12; i++) {
 for (let i = 0; i < 5; i++) {
     let die = $(`#die${i}`);
     die.prop("disabled", true);
-    $(`#die${i}`).children("img").attr("src", diceImages[i]);
+    die.children("img").attr("src", diceImages[i]);
 }
-var rollDiceClick = function (e) {
+var rerollClick = function (e) {
+    if (rerolls-1 < 0){
+        $("#reroll-div").css("color", "grey");
+        $("#reroll-button").prop("disabled", true);
+        return false;
+    }
+    rerolls = rerolls - 1;
+    rollDiceClick();
+    for (let i = 0; i < 12; i++) {
+        $(`#comb-name-bttn-${i}`).prop("disabled", true);
+        $(`#comb-name-bttn-${i}`).css("color", "ivory");
+    }
+    console.log("rerolls: " + rerolls);
+    e.stopImmediatePropagation();
+    return false;
+}
+var rollDiceClick = function () {
+    //init reroll button
+    $("#rerolls-amount").html(rerolls);
+    $("#reroll-button").prop("disabled", false);
+
+
     $(".die").prop("disabled", true);
     $("#roll-dice").prop("disabled", true);
-    var intervalRepeatCount = 0;
-    for (var i = 0; i < 12; i++) {
+    let intervalRepeatCount = 0;
+    for (let i = 0; i < 12; i++) {
         if ($(`#comb-score-${i}`).data("preserved") === true) {
             continue;
         }
@@ -38,7 +60,7 @@ var rollDiceClick = function (e) {
         $(`#chance-name-bttn`).prop("disabled", true);
         $("#chance-score").text("-");
     }
-    var diceRollInterval = setInterval(function () {
+    let diceRollInterval = setInterval(function () {
         $.get("/Dice/GetRolledDice", function (data) {
             for (let i = 0; i < data.length; i++) {
                 currentRoll[i] = data[i].value;
@@ -47,26 +69,28 @@ var rollDiceClick = function (e) {
                 }
             }
         }, "json");
-        if (intervalRepeatCount === 2) { clearInterval(diceRollInterval); return; }
+        if (intervalRepeatCount === 2) {
+            clearInterval(diceRollInterval);
+            return;
+        }
         intervalRepeatCount++;
-    }, 300);
+    }, 200);
     ShowAvailableCombinations();
     AreNoCombsAvailable();
-    e.stopImmediatePropagation();
     return false;
 }
 var ShowAvailableCombinations = function () {
     setTimeout(function () {
-        for (var i = 0; i < 12; i++) {
+        for (let i = 0; i < 12; i++) {
             if ($(`#comb-score-${i}`).data("preserved") === true) {
                 continue;
             }
             $(`#comb-name-bttn-${i}`).prop("disabled", false);
         }
         $(".die").prop("disabled", false);
-        console.log(currentRoll);
+        console.log("current-roll: " + currentRoll);
         $.post("/Dice/CombinationChecker", { rolls: JSON.stringify(currentRoll) }, function (response) {
-            for (var i = 0; i < response.length; i++) {
+            for (let i = 0; i < response.length; i++) {
                 console.log(`${combs[i]}:${response[i]}`);
                 if (response[i]) {
                     if ($(`#comb-score-${i}`).data("preserved") === true) {
@@ -86,13 +110,11 @@ var ShowAvailableCombinations = function () {
             $(`#chance-name`).css("background-color", "#d7ffc9");//set bgcolor to greenish if true returned        
             $(`#chance-name-bttn`).css("color", "#111111");
         }
-    }, 1000);
+    }, 700);
     return false;
 }
-
-
-var CombClick = function (e) {
-    var id = this.id.split("-").pop(); //id from button
+var CombClick = function () {
+    let id = this.id.split("-").pop(); //id from button
     if ($(`#comb-name-bttn-${id}`).attr("data-available") === "1" || $(`#comb-score-${id}`).data("preserved") === false) {
         $.ajax({
             url: "/Score/CombinationScoreCalc",
@@ -104,7 +126,7 @@ var CombClick = function (e) {
             }
         });
     }
-    for (var i = 0; i < 12; i++) {
+    for (let i = 0; i < 12; i++) {
         $(`#comb-name-bttn-${i}`).prop("disabled", true); //disable combination buttons
         $(`#comb-name-bttn-${i}`).css("color", "ivory");
     }
@@ -120,11 +142,11 @@ var CombClick = function (e) {
 
     BonusCheck();
     FinishCheck();
+    rerolls = 3;
     return false;
 }
-
-var ChanceCombClick = function (e) {
-    var chanceSum = currentRoll.reduce(function (a, b) {
+var ChanceCombClick = function () {
+    let chanceSum = currentRoll.reduce(function (a, b) {
         return a + b;
     }, 0);
     $("#chance-score").text(chanceSum);
@@ -133,13 +155,14 @@ var ChanceCombClick = function (e) {
     $("#chance-name-bttn").prop("disabled", true);
     $(`#chance-name-bttn`).css("color", "ivory");
     $("#roll-dice").prop("disabled", false);
-    for (var i = 0; i < 12; i++) {
+    for (let i = 0; i < 12; i++) {
         $(`#comb-name-bttn-${i}`).prop("disabled", true);
         $(`#comb-name-bttn-${i}`).css("color", "ivory");
         $(`#comb-name-bttn-${i}`).attr("data-available", "0");
         $(`#comb-name-${i}`).css("background-color", "");
     }
     $("#roll-dice").prop("disabled", false);
+    rerolls = 3;
 }
 var AreNoCombsAvailable = function () {
     setTimeout(function () {
@@ -164,7 +187,7 @@ var BonusCheck = function () {
         for (let i = 0; i < 6; i++) {
             bonusScores[i] = parseInt($(`#comb-score-${i}`).text());
         }
-        lowerSectSum = bonusScores.reduce(function (a, b) {
+        let lowerSectSum = bonusScores.reduce(function (a, b) {
             return a + b;
         }, 0);
         if (lowerSectSum >= 63) {
@@ -197,8 +220,10 @@ var FinishCheck = function () {
         $("#overall-score").text(overallScore);
     }, 500);
 }
+$("#reroll-button").prop("disabled", true);
+$("#reroll-button").on("click", rerollClick);
 $("#roll-dice").on("click", rollDiceClick);
-for (var i = 0; i < 12; i++) {
+for (let i = 0; i < 12; i++) {
     $(`#comb-name-bttn-${i}`).on("click", CombClick);
 }
 $(`#chance-name-bttn`).on("click", ChanceCombClick);
